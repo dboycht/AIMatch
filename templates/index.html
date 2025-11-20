@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI学习笔记生成器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-card">
+            <div class="card-header">
+                <h1 class="mb-2"><i class="fas fa-robot me-2"></i>AI学习笔记生成器</h1>
+                <p class="mb-0">基于AI技术，智能生成个性化学习笔记</p>
+            </div>
+            <div class="card-body">
+                <form id="ai-assistant-form">
+                    <div class="input-section">
+                        <label for="user-input" class="form-label">
+                            <i class="fas fa-edit me-1"></i>学习内容
+                        </label>
+                        <textarea class="form-control" id="user-input" rows="5"
+                                  placeholder="请输入您要学习的内容、问题或笔记..."></textarea>
+                        <div class="form-text">您可以输入任何学习相关的内容，AI会帮您整理成结构化的笔记</div>
+                    </div>
+
+                    <div class="input-section">
+                        <label for="analysis-mode" class="form-label">
+                            <i class="fas fa-cog me-1"></i>处理模式
+                        </label>
+                        <select class="form-select" id="analysis-mode" required>
+                            <option value="" selected disabled>请选择AI处理模式</option>
+                            <option value="cloud">云端阿里云 - 快速稳定</option>
+                            <option value="local">本地Ollama - 隐私保护</option>
+                            <option value="gpt">ChatGPT - 智能分析</option>
+                        </select>
+                        <div class="form-text">选择不同的AI引擎来处理您的学习内容</div>
+                    </div>
+
+                    <div class="input-section">
+                        <label class="form-label">
+                            <i class="fas fa-file-upload me-1"></i>上传学习文件（可选）
+                        </label>
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <p class="mb-1">点击或拖拽文件到此处上传</p>
+                            <p class="text-muted small">支持 TXT、PDF、MD、DOCX 格式文件</p>
+                            <input type="file" id="file-input" multiple style="display: none;">
+                        </div>
+                        <div class="file-list" id="file-list"></div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submit-btn">
+                        <i class="fas fa-magic me-2"></i>生成学习笔记
+                    </button>
+                </form>
+
+                <div class="loading-section" id="loading-section">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">AI正在为您生成学习笔记，请稍候...</p>
+                    <div class="progress mt-3">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                             style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <div class="result-section" id="result-section">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4>笔记生成完成！</h4>
+                    <p>您的个性化学习笔记已准备就绪</p>
+                    <div class="result-actions">
+                        <button class="btn-download" id="auto-download-btn">
+                            <i class="fas fa-download me-2"></i>下载笔记文件
+                        </button>
+                        <button class="btn-secondary" id="new-request-btn">
+                            <i class="fas fa-plus me-2"></i>创建新的笔记
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <h5>快速生成</h5>
+                        <p>AI智能分析，秒级生成结构化笔记</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h5>个性定制</h5>
+                        <p>根据学习内容生成个性化学习建议</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-file-alt"></i>
+                        <h5>多格式支持</h5>
+                        <p>支持文本、文档输入(txt, md, doc, docx, mp4, m4a, mov)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
